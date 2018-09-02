@@ -7,16 +7,29 @@
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
 
+`RedactionHandler` will strip sensitive method/function arguments from stack traces.
+
 ## Installation
 
 ```bash
 $ composer require liamja/redaction-handler
 ```
 
-## Getting Started
+## Usage
+
+Wrap any handlers you wish redact with the `RedactionHandler`.
+
+The 2nd argument is an array of function or method names to strip.
 
 ```php
-// Example code to come.
+$logger = new Logger('foo');
+$testHandler = new TestHandler();
+$redactionHandler = new RedactionHandler(new TestHandler(), ['checkPassword']);
+
+$logger->pushHandler($redactionHandler);
+
+$password = 'hunter2';
+checkPassword($password);  // checkPassword(REDACTED) will appear in the log file.
 ```
 
 ## Changelog
