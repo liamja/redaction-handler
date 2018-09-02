@@ -1,0 +1,45 @@
+{
+    "name": "liamja/redaction-handler",
+    "version": "0.1.0",
+    "description": "Strip matching function/method arguments from Monolog entries.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Liam Anderson",
+            "email": "liam.anderson.91@gmail.com"
+        }
+    ],
+    "config": {
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "Liamja\\RedactionHandler\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Liamja\\RedactionHandler\\Tests\\": "tests/"
+        }
+    },
+    "require": {
+        "php": "^7.1",
+        "monolog/monolog": "^1.23",
+        "sensiolabs/security-checker": "^4.1"
+    },
+    "require-dev": {
+        "phpmd/phpmd": "^2.6",
+        "phpstan/phpstan": "^0.10.3",
+        "phpunit/phpunit": "^7",
+        "roave/security-advisories": "dev-master"
+    },
+    "scripts": {
+        "test": [
+            "security-checker security:check",
+            "phpstan analyse --no-progress --level 7 src tests",
+            "phpmd src text cleancode,codesize,controversial,design,naming,unusedcode",
+            "phpunit --testdox"
+        ]
+    }
+}

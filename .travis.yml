@@ -1,0 +1,11 @@
+language: php
+php:
+- '7.1.21'
+- '7.2'
+before_script:
+- composer install
+script:
+- ./vendor/bin/security-checker security:check
+- ./vendor/bin/phpunit --testdox
+- ./vendor/bin/phpstan analyse --no-progress --level 7 ./src ./tests
+- ./vendor/bin/phpmd ./src text cleancode,design,unusedcode
